@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="banner-wrap">
+			<div class="banner-box" id="banner">
+				<ul class="item">
+					<li class="list">1</li>
+					<li class="list">2</li>
+					<li class="list">3</li>
+				</ul>
+				<ul class="item">
+					<li class="list">4</li>
+					<li class="list">5</li>
+					<li class="list">6</li>
+				</ul>
+				<ul class="item">
+					<li class="list">7</li>
+					<li class="list">8</li>
+					<li class="list">9</li>
+				</ul>
+			
+			</div>
+			<span id="left"><</span><span id="right">></span>
+		</div>
+		<script type="text/javascript">
+			window.onload = function() {
+				let arrowL = document.getElementById('left')
+				let arrowR = document.getElementById('right')
+				let banner = document.getElementById('banner')
+				let itemArr = document.getElementsByClassName('item')
+				let itemW = itemArr[0].offsetWidth
+				banner.style.width = itemW*itemArr.length+'px'
+				arrowL.addEventListener('click', function(e) {  
+				  console.log(banner.offsetLeft)
+				  if(banner.offsetLeft<0)
+					banner.style.left=(banner.offsetLeft+itemW) + 'px';
+				  else{
+					banner.style.left=(itemW-banner.offsetWidth) + 'px'
+				  }
+				})
+				arrowR.addEventListener('click', function(e) {
+					console.log(banner.offsetLeft,banner.offsetWidth)
+					if(banner.offsetLeft>itemW-banner.offsetWidth)
+					banner.style.left=(banner.offsetLeft-itemW) + 'px';
+					else{
+						banner.style.left=0
+					}
+				})
+			}
+			
+
+		</script>
+	</body>
+	<style>
+		ul,li,div,span,p{
+			margin: 0;padding: 0;list-style: none;
+		}
+		.banner-wrap{
+			width: 600px;
+			position: relative;
+			overflow: hidden;
+			margin: 100px;
+		}
+		span{
+			position: absolute;
+			left: 0;
+			top:50%;
+			transform: translateY(-50%);
+			color: #fff;
+			width: 20px;
+			height: 20px;
+			line-height: 20px;
+			background-color: rgba(255,255,255,.6);
+			text-align: center;
+			cursor: pointer;
+		}
+		span+span{
+			right: 0;
+			left: inherit;
+		}
+		.banner-box{
+			height: 100px;
+			background-color: antiquewhite;
+			left: 0;
+			transition: .5s;
+			position: relative;
+		}
+		.active{
+			left: -600px;
+			
+		}
+		.list{
+			width: 200px;
+			height: 100px;
+			background-color: blue;
+			float: left;
+		}
+		.list:nth-of-type(2n){
+			background-color: aquamarine;
+		}
+		.list:nth-of-type(3n){
+			background-color: palevioletred;
+		}
+	</style>
+</html>
